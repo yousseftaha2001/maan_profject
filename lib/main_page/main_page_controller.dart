@@ -27,13 +27,14 @@ class MainPageController extends GetxController {
     // if (state.speaking) {
     //    await state.flutterTts.stop();
     //     changeSpeakingState(false);
-    // 
+    //
     // }
     // if (strrtV.value) {
     //   await stopMethod();
     // }
     // startListen();
-    playMethod('${photoAPI}room_l/o7sYqoWx16u1lPz8a0hULpkmFwjCDomSmO2rQkpX.webm');
+    speak('اهلا');
+    // playMethod('${photoAPI}room_l/o7sYqoWx16u1lPz8a0hULpkmFwjCDomSmO2rQkpX.webm');
   }
 
   void startListen() async {
@@ -51,8 +52,20 @@ class MainPageController extends GetxController {
       }
     } else {
        await state.speech.initialize(
-                onStatus: (val){
-                  print(val);
+                onStatus: (val)async{
+                 if(val=='done'){
+                   await state.speech.cancel();
+                   changeListenState(false);
+
+                   // speaker(state.text);
+
+                   update();
+                   // print(state.text.toString() + "d");
+                   if (state.text.isNotEmpty) {
+                     choiceSelector(state.text);
+                   }
+                 }
+
                 },
           onError: (val) => print('onError: $val'),
     );
@@ -132,7 +145,7 @@ class MainPageController extends GetxController {
     changeSpeakingState(true);
     state.flutterTts.setLanguage('ar');
     state.flutterTts.setVolume(1);
-    state.flutterTts.setVoice({'locale': 'ar-001', 'name': 'Majed'});
+    // state.flutterTts.setVoice({'locale': 'ar-001', 'name': 'Majed'});
     await state.flutterTts.awaitSpeakCompletion(true);
     await state.flutterTts.speak(t);
     changeSpeakingState(false);
@@ -268,7 +281,7 @@ class MainPageController extends GetxController {
     // TODO: implement onInit
     super.onInit();
   
-    // sendStartMethod();
+    sendStartMethod();
     state.speech = stt.SpeechToText();
     // print(state.flutterTts.getVoices);
     // testing();
