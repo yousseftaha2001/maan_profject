@@ -19,6 +19,8 @@ class MainPageState {
   FlutterTts flutterTts = FlutterTts();
   late MatchRoomModel matchRoomModel;
   int end = 0;
+  String? currentid;
+  String? currentCode;
 
   String? _newVoiceText;
 

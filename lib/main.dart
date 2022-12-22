@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       builder: (context, child) {
         return GetMaterialApp(
-          title: 'Flutter Demo',
+          // title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
           locale: const Locale('ar'),
           theme: ThemeData(

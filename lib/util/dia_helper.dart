@@ -129,6 +129,8 @@ class DioHelper {
   static Future< Response> postMethod(
       {required String url, required dynamic data}) async {
     try {
+
+      
     
       Response response = await dio.post(
         url,
@@ -138,6 +140,7 @@ class DioHelper {
      return response;
     } on DioError catch (e) {
       // Handle error
+      print(e.toString());
       return e.response!;
     }
   }
